@@ -1,9 +1,9 @@
 {
   "name": "openclaw-a2a-gateway",
-  "version": "1.4.0",
+  "version": "1.6.0",
   "type": "module",
-  "description": "OpenClaw plugin implementing the A2A (Agent-to-Agent) v0.3.0 protocol — bio-inspired routing, discovery, and resilience for multi-agent ecosystems",
-  "main": "index.ts",
+  "description": "OpenClaw plugin implementing the A2A (Agent-to-Agent) protocol gateway",
+  "main": "dist/index.js",
   "keywords": [
     "openclaw",
     "a2a",
@@ -17,12 +17,12 @@
     "type": "git",
     "url": "https://github.com/win4r/openclaw-a2a-gateway.git"
   },
-  "homepage": "https://github.com/win4r/openclaw-a2a-gateway#readme",
   "scripts": {
+    "build": "esbuild index.ts --bundle --platform=node --format=esm --outfile=dist/index.js --external:@grpc/grpc-js --external:express --external:multicast-dns --external:ws --external:@a2a-js/sdk --external:@a2a-js/sdk/server --external:@a2a-js/sdk/server/express --external:@a2a-js/sdk/server/grpc --external:@bufbuild/protobuf",
     "test": "node --import tsx --test tests/*.test.ts"
   },
   "dependencies": {
-    "@a2a-js/sdk": "^0.3.13",
+    "@a2a-js/sdk": "^1.0.0-alpha.0",
     "@bufbuild/protobuf": "^2.11.0",
     "@grpc/grpc-js": "^1.14.3",
     "express": "^4.21.2",
@@ -31,9 +31,16 @@
     "ws": "^8.20.0"
   },
   "openclaw": {
+    "plugin": "./openclaw.plugin.json",
     "extensions": [
-      "./index.ts"
-    ]
+      "./dist/index.js"
+    ],
+    "build": {
+      "openclawVersion": ">=2026.3.22"
+    },
+    "compat": {
+      "pluginApi": ">=2026.3.22"
+    }
   },
   "devDependencies": {
     "@types/express": "^5.0.6",

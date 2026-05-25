@@ -1,7 +1,7 @@
 /**
  * A2A Gateway Plugin — Standard types
  *
- * These types support the A2A v0.3.0 protocol integration via @a2a-js/sdk.
+ * These types support the A2A v1.0 protocol integration via @a2a-js/sdk.
  */
 
 // ---------------------------------------------------------------------------

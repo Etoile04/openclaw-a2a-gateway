@@ -319,7 +319,7 @@ function normalizeCardPath(): string {
 const plugin = {
   id: "a2a-gateway",
   name: "A2A Gateway",
-  description: "OpenClaw plugin that serves A2A v0.3.0 endpoints",
+  description: "OpenClaw plugin that serves A2A v1.0 endpoints",
 
   register(api: OpenClawPluginApi) {
     const config = parseConfig(api.pluginConfig, api.resolvePath?.bind(api));
@@ -613,34 +613,34 @@ const plugin = {
     let cleanupTimer: ReturnType<typeof setInterval> | null = null;
     const grpcPort = config.server.port + 1;
 
-    api.registerGatewayMethod("a2a.metrics", ({ respond }) => {
-      respond(true, {
+    api.registerGatewayMethod("a2a.metrics", (opts) => {
+      opts.respond(true, {
         metrics: telemetry.snapshot(),
       });
     });
 
-    api.registerGatewayMethod("a2a.audit", ({ params, respond }) => {
-      const payload = asObject(params);
+    api.registerGatewayMethod("a2a.audit", (opts) => {
+      const payload = asObject(opts.params);
       const count = Math.min(Math.max(1, asNumber(payload.count, 50)), 500);
       auditLogger
         .tail(count)
-        .then((entries) => respond(true, { entries, count: entries.length }))
-        .catch((error) => respond(false, { error: String(error?.message || error) }));
+        .then((entries) => opts.respond(true, { entries, count: entries.length }))
+        .catch((error) => opts.respond(false, { error: String(error?.message || error) }));
     });
 
-    api.registerGatewayMethod("a2a.pushNotification.register", ({ params, respond }) => {
-      const payload = asObject(params);
+    api.registerGatewayMethod("a2a.pushNotification.register", (opts) => {
+      const payload = asObject(opts.params);
       const taskId = asString(payload.taskId, "");
       const url = asString(payload.url, "");
       if (!taskId || !url) {
-        respond(false, { error: "taskId and url are required" });
+        opts.respond(false, { error: "taskId and url are required" });
         return;
       }
 
       // SSRF validation on webhook URL
       validateUri(url, config.security).then((uriCheck) => {
         if (!uriCheck.ok) {
-          respond(false, { error: `Webhook URL rejected: ${uriCheck.reason}` });
+          opts.respond(false, { error: `Webhook URL rejected: ${uriCheck.reason}` });
           return;
         }
         const token = asString(payload.token, "") || undefined;
@@ -648,26 +648,26 @@ const plugin = {
           ? (payload.events as unknown[]).filter((e): e is string => typeof e === "string")
           : undefined;
         pushStore.register(taskId, { url, token, events });
-        respond(true, { taskId, registered: true });
+        opts.respond(true, { taskId, registered: true });
       }).catch((err) => {
-        respond(false, { error: `URI validation failed: ${err instanceof Error ? err.message : String(err)}` });
+        opts.respond(false, { error: `URI validation failed: ${err instanceof Error ? err.message : String(err)}` });
       });
     });
 
-    api.registerGatewayMethod("a2a.pushNotification.unregister", ({ params, respond }) => {
-      const payload = asObject(params);
+    api.registerGatewayMethod("a2a.pushNotification.unregister", (opts) => {
+      const payload = asObject(opts.params);
       const taskId = asString(payload.taskId, "");
       if (!taskId) {
-        respond(false, { error: "taskId is required" });
+        opts.respond(false, { error: "taskId is required" });
         return;
       }
       const existed = pushStore.has(taskId);
       pushStore.unregister(taskId);
-      respond(true, { taskId, removed: existed });
+      opts.respond(true, { taskId, removed: existed });
     });
 
-    api.registerGatewayMethod("a2a.send", ({ params, respond }) => {
-      const payload = asObject(params);
+    api.registerGatewayMethod("a2a.send", (opts) => {
+      const payload = asObject(opts.params);
       let peerName = asString(payload.peer || payload.name, "");
       const message = asObject(payload.message || payload.payload);
 
@@ -714,7 +714,7 @@ const plugin = {
         const hint = peerName
           ? `Peer not found: ${peerName}`
           : "No peer specified and no routing rule matched";
-        respond(false, { error: hint });
+        opts.respond(false, { error: hint });
         return;
       }
 
@@ -736,14 +736,14 @@ const plugin = {
           telemetry.recordOutboundRequest(peer.name, result.ok, result.statusCode, outDuration);
           auditLogger.recordOutbound(peer.name, result.ok, result.statusCode, outDuration);
           if (result.ok) {
-            respond(true, {
+            opts.respond(true, {
               statusCode: result.statusCode,
               response: result.response,
             });
             return;
           }
 
-          respond(false, {
+          opts.respond(false, {
             statusCode: result.statusCode,
             response: result.response,
           });
@@ -752,7 +752,7 @@ const plugin = {
           const errDuration = Date.now() - startedAt;
           telemetry.recordOutboundRequest(peer.name, false, 500, errDuration);
           auditLogger.recordOutbound(peer.name, false, 500, errDuration);
-          respond(false, { error: String(error?.message || error) });
+          opts.respond(false, { error: String(error?.message || error) });
         });
     });
 

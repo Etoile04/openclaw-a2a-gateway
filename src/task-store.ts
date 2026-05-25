@@ -2,6 +2,7 @@ import { mkdir, readdir, readFile, rename, unlink, writeFile } from "node:fs/pro
 import path from "node:path";
 
 import type { Task } from "@a2a-js/sdk";
+import type { ListTasksRequest, ListTasksResponse } from "@a2a-js/sdk";
 import type { ServerCallContext, TaskStore } from "@a2a-js/sdk/server";
 
 function cloneTask(task: Task): Task {
@@ -77,6 +78,54 @@ export class FileTaskStore implements TaskStore {
         // ignore
       }
     }
+  }
+
+  /** List tasks per A2A 1.0 TaskStore interface with pagination. */
+  async list(
+    params: ListTasksRequest,
+    _context?: ServerCallContext
+  ): Promise<ListTasksResponse> {
+    const allIds = await this.listAll();
+    const tasks: Task[] = [];
+    for (const id of allIds) {
+      const t = await this.load(id, _context);
+      if (t) tasks.push(t);
+    }
+    // Sort by status timestamp descending (most recent first)
+    tasks.sort(
+      (a, b) =>
+        (b.status?.timestamp || "").localeCompare(a.status?.timestamp || "")
+    );
+    const pageSize = params.pageSize || 50;
+    const pageToken = params.pageToken || "";
+    let startIdx = 0;
+    if (pageToken) {
+      try {
+        const decoded = Buffer.from(pageToken, "base64").toString("utf8");
+        const [ts, id] = decoded.split("|");
+        const idx = tasks.findIndex(
+          (t) =>
+            (t.status?.timestamp || "") === ts && t.id === id
+        );
+        startIdx = idx >= 0 ? idx + 1 : tasks.length;
+      } catch {
+        startIdx = 0;
+      }
+    }
+    const page = tasks.slice(startIdx, startIdx + pageSize);
+    let nextPageToken = "";
+    if (startIdx + pageSize < tasks.length) {
+      const last = page[page.length - 1];
+      nextPageToken = Buffer.from(
+        `${last.status?.timestamp || ""}|${last.id}`
+      ).toString("base64");
+    }
+    return {
+      tasks: page,
+      nextPageToken,
+      pageSize,
+      totalSize: tasks.length,
+    } as ListTasksResponse;
   }
 
   /** List all stored task IDs. */

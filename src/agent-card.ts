@@ -45,7 +45,7 @@ export function buildAgentCard(config: GatewayConfig): AgentCard {
     : server.host;
 
   return {
-    protocolVersion: "0.3.0",
+    protocolVersion: "1.0",
     version: "1.0.0",
     name: agentCard.name || "OpenClaw A2A Gateway",
     description: agentCard.description || "A2A bridge for OpenClaw agents",
@@ -61,10 +61,10 @@ export function buildAgentCard(config: GatewayConfig): AgentCard {
     supportsAuthenticatedExtendedCard: false,
     defaultInputModes: ["text"],
     defaultOutputModes: ["text"],
-    additionalInterfaces: [
-      { url: configuredUrl || fallbackUrl, transport: "JSONRPC" },
-      { url: `${new URL(configuredUrl || fallbackUrl).origin}/a2a/rest`, transport: "HTTP+JSON" },
-      { url: `${grpcHost}:${grpcPort}`, transport: "GRPC" },
+    supportedInterfaces: [
+      { url: configuredUrl || fallbackUrl, protocolBinding: "JSONRPC", protocolVersion: "1.0", tenant: "" },
+      { url: `${new URL(configuredUrl || fallbackUrl).origin}/a2a/rest`, protocolBinding: "HTTP+JSON", protocolVersion: "1.0", tenant: "" },
+      { url: `${grpcHost}:${grpcPort}`, protocolBinding: "GRPC", protocolVersion: "1.0", tenant: "" },
     ],
   };
 }
