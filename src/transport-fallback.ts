@@ -22,7 +22,7 @@
 // Transport priority
 // ---------------------------------------------------------------------------
 
-/** Canonical transport protocol names from the A2A v0.3.0 spec. */
+/** Canonical transport protocol names from the A2A v1.0 spec. */
 export type TransportPriority = "JSONRPC" | "HTTP+JSON" | "GRPC";
 
 /** Fallback order: JSON-RPC first, REST second, gRPC last. */
