@@ -1,7 +1,7 @@
 # 🦞 OpenClaw A2A Gateway Plugin
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![A2A v0.3.0](https://img.shields.io/badge/A2A-v0.3.0-green.svg)](https://github.com/google/A2A)
+[![A2A v1.0](https://img.shields.io/badge/A2A-v1.0-green.svg)](https://github.com/google/A2A)
 [![Tests](https://img.shields.io/badge/tests-469%20passing-brightgreen.svg)]()
 [![Node](https://img.shields.io/badge/node-%E2%89%A522-blue.svg)]()
 
@@ -672,7 +672,7 @@ Alle bioinspirierten Features sind **optional und abwärtskompatibel** — ohne 
 | **v1.1.0** | URL-Extraktion, Transport-Fallback, Push-Benachrichtigungen, regelbasiertes Routing, DNS-SD-Erkennung |
 | **v1.0.1** | Ed25519-Geräteidentität, Metriken-Authentifizierung, CI |
 | **v1.0.0** | Produktionsreif: Persistenz, Mehrrundenmodus, Dateiübertragung, SSE, Gesundheitsprüfungen, Multi-Token, Audit |
-| **v0.1.0** | Erste A2A v0.3.0 Implementierung |
+| **v0.1.0** | Erste A2A v1.0 Implementierung |
 
 Siehe [CHANGELOG.md](CHANGELOG.md) für vollständige Details und [Releases](https://github.com/win4r/openclaw-a2a-gateway/releases) für Downloads.
 

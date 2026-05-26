@@ -1,7 +1,7 @@
 # 🦞 OpenClaw A2A Gateway 플러그인
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![A2A v0.3.0](https://img.shields.io/badge/A2A-v0.3.0-green.svg)](https://github.com/google/A2A)
+[![A2A v1.0](https://img.shields.io/badge/A2A-v1.0-green.svg)](https://github.com/google/A2A)
 [![Tests](https://img.shields.io/badge/tests-469%20passing-brightgreen.svg)]()
 [![Node](https://img.shields.io/badge/node-%E2%89%A522-blue.svg)]()
 
@@ -672,7 +672,7 @@ skill/
 | **v1.1.0** | URL 추출, 전송 폴백, 푸시 알림, 규칙 기반 라우팅, DNS-SD 검색 |
 | **v1.0.1** | Ed25519 디바이스 ID, 메트릭 인증, CI |
 | **v1.0.0** | 프로덕션 준비: 영속성, 다중 라운드, 파일 전송, SSE, 헬스 체크, 멀티 토큰, 감사 |
-| **v0.1.0** | 초기 A2A v0.3.0 구현 |
+| **v0.1.0** | 초기 A2A v1.0 구현 |
 
 전체 세부 사항은 [CHANGELOG.md](CHANGELOG.md)를, 다운로드는 [Releases](https://github.com/win4r/openclaw-a2a-gateway/releases)를 참조하세요.
 

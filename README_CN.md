@@ -1,7 +1,7 @@
 # 🦞 OpenClaw A2A Gateway 插件
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![A2A v0.3.0](https://img.shields.io/badge/A2A-v0.3.0-green.svg)](https://github.com/google/A2A)
+[![A2A v1.0](https://img.shields.io/badge/A2A-v1.0-green.svg)](https://github.com/google/A2A)
 [![Tests](https://img.shields.io/badge/tests-486%20passing-brightgreen.svg)]()
 [![Node](https://img.shields.io/badge/node-%E2%89%A522-blue.svg)]()
 
@@ -631,7 +631,7 @@ Agent 会自动按照 skill 的流程执行。
 | **v1.1.0** | URL 提取、传输降级、Push 通知、规则路由、DNS-SD 发现 |
 | **v1.0.1** | Ed25519 设备身份、Metrics 鉴权、CI |
 | **v1.0.0** | 生产就绪：持久化、多轮对话、文件传输、SSE、健康检查、多 Token、审计 |
-| **v0.1.0** | A2A v0.3.0 初始实现 |
+| **v0.1.0** | A2A v1.0 初始实现 |
 
 详见 [CHANGELOG.md](CHANGELOG.md) 和 [Releases](https://github.com/win4r/openclaw-a2a-gateway/releases)。
 

@@ -1,13 +1,14 @@
 # 🦞 OpenClaw A2A Gateway Plugin
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![A2A v0.3.0](https://img.shields.io/badge/A2A-v0.3.0-green.svg)](https://github.com/google/A2A)
+[![A2A v1.0](https://img.shields.io/badge/A2A-v1.0-green.svg)](https://github.com/google/A2A)
 [![Tests](https://img.shields.io/badge/tests-486%20passing-brightgreen.svg)]()
 [![Node](https://img.shields.io/badge/node-%E2%89%A522-blue.svg)]()
+[![A2A SDK](https://img.shields.io/badge/@a2a--js/sdk-1.0-blue.svg)]()
 
 [English](README.md) | [简体中文](README_CN.md) | [繁體中文](README_TW.md) | [日本語](README_JA.md) | [한국어](README_KO.md) | [Français](README_FR.md) | [Español](README_ES.md) | [Deutsch](README_DE.md) | [Italiano](README_IT.md) | [Русский](README_RU.md) | [Português (Brasil)](README_PT-BR.md)
 
-A production-ready [OpenClaw](https://github.com/openclaw/openclaw) plugin that implements the [A2A (Agent-to-Agent) v0.3.0 protocol](https://github.com/google/A2A), enabling OpenClaw agents to discover and communicate with each other across servers — with zero-config install and automatic peer discovery.
+A production-ready [OpenClaw](https://github.com/openclaw/openclaw) plugin that implements the [A2A (Agent-to-Agent) v1.0 protocol](https://github.com/google/A2A), enabling OpenClaw agents to discover and communicate with each other across servers — with zero-config install and automatic peer discovery.
 
 **The only A2A gateway with adaptive, bio-inspired routing, discovery, and resilience — designed for multi-agent ecosystems at scale.**
 
@@ -186,6 +187,31 @@ curl -s http://localhost:18800/.well-known/agent-card.json | python3 -m json.too
 ```
 
 You should see your Agent Card with name, skills, and URL.
+
+### Standalone Mode (without OpenClaw)
+
+The gateway can run independently without an OpenClaw server, using the bundled standalone launcher:
+
+```bash
+# Build first
+npm run build
+
+# Run standalone (default port 18800)
+node standalone.mjs
+
+# With custom settings
+A2A_PORT=18801 A2A_HOST=0.0.0.0 A2A_TOKEN=mysecret node standalone.mjs
+```
+
+| Environment Variable | Default | Description |
+|---------------------|---------|-------------|
+| `A2A_PORT` | `18800` | Gateway listen port |
+| `A2A_HOST` | `0.0.0.0` | Gateway listen host |
+| `A2A_STORAGE_DIR` | `./storage` | Task storage directory |
+| `A2A_AUTH` | `none` | Auth mode (`none` or `bearer`) |
+| `A2A_TOKEN` | _(empty)_ | Bearer token for auth |
+
+> **Note:** Standalone mode provides the full A2A v1.0 HTTP/JSON-RPC interface but does not include OpenClaw-specific features (agent dispatch, gateway methods). For production use with OpenClaw agents, use the plugin mode.
 
 ## Adding Peers
 
@@ -701,6 +727,7 @@ All bio-inspired features are **optional and backward-compatible** — without e
 
 | Version | Highlights |
 |---------|-----------|
+| **v1.6.0** | A2A v1.0 protocol upgrade, standalone launcher, esbuild bundling, TaskStore pagination |
 | **v1.2.0** | Peer skills routing, mDNS self-advertisement (symmetric discovery) |
 | **v1.1.0** | URL extraction, transport fallback, push notifications, rule-based routing, DNS-SD discovery |
 | **v1.0.1** | Ed25519 device identity, metrics auth, CI |

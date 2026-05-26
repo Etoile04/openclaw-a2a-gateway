@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [1.6.0] - 2026-05-28
+
+### Added
+
+- **A2A v1.0 protocol upgrade** — migrated from `@a2a-js/sdk` v0.3.13 to v1.0.0-alpha.0
+  - Agent card `protocolVersion` updated from `"0.3.0"` to `"1.0"`
+  - `additionalInterfaces` replaced with `supportedInterfaces` (v1.0 spec: `protocolBinding`, `protocolVersion`, `tenant`)
+  - Gateway method callbacks migrated from destructured `({ params, respond })` to single `opts` parameter pattern
+- **Standalone launcher** (`standalone.mjs`) — run the A2A gateway without an OpenClaw server
+  - Environment variable configuration: `A2A_PORT`, `A2A_HOST`, `A2A_STORAGE_DIR`, `A2A_AUTH`, `A2A_TOKEN`
+  - Full A2A v1.0 HTTP/JSON-RPC interface
+- **TaskStore pagination** — `FileTaskStore.list()` implements the A2A 1.0 `TaskStore` interface with cursor-based pagination (`pageSize`, `pageToken`, `nextPageToken`, `totalSize`)
+- **esbuild bundling pipeline** — `npm run build` produces `dist/index.js` for production deployment
+- **Plugin manifest** — `openclaw.plugin.json` with compatibility metadata for OpenClaw ≥2026.3.22
+
+### Changed
+
+- `package.json` `main` entry changed from `index.ts` to `dist/index.js`
+- Plugin extensions path updated from `./index.ts` to `./dist/index.js`
+
 ## [1.4.0] - 2026-04-04
 
 ### Added

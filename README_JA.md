@@ -1,7 +1,7 @@
 # 🦞 OpenClaw A2A Gateway プラグイン
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![A2A v0.3.0](https://img.shields.io/badge/A2A-v0.3.0-green.svg)](https://github.com/google/A2A)
+[![A2A v1.0](https://img.shields.io/badge/A2A-v1.0-green.svg)](https://github.com/google/A2A)
 [![Tests](https://img.shields.io/badge/tests-469%20passing-brightgreen.svg)]()
 [![Node](https://img.shields.io/badge/node-%E2%89%A522-blue.svg)]()
 
@@ -672,7 +672,7 @@ skill/
 | **v1.1.0** | URL 抽出、トランスポートフォールバック、プッシュ通知、ルールベースルーティング、DNS-SD 検出 |
 | **v1.0.1** | Ed25519 デバイスID、メトリクス認証、CI |
 | **v1.0.0** | 本番対応: 永続化、マルチラウンド、ファイル転送、SSE、ヘルスチェック、マルチトークン、監査 |
-| **v0.1.0** | A2A v0.3.0 の初期実装 |
+| **v0.1.0** | A2A v1.0 の初期実装 |
 
 詳細は [CHANGELOG.md](CHANGELOG.md) を、ダウンロードは [Releases](https://github.com/win4r/openclaw-a2a-gateway/releases) をご覧ください。
 

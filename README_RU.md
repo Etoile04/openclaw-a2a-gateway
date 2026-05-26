@@ -1,7 +1,7 @@
 # 🦞 Плагин OpenClaw A2A Gateway
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![A2A v0.3.0](https://img.shields.io/badge/A2A-v0.3.0-green.svg)](https://github.com/google/A2A)
+[![A2A v1.0](https://img.shields.io/badge/A2A-v1.0-green.svg)](https://github.com/google/A2A)
 [![Tests](https://img.shields.io/badge/tests-469%20passing-brightgreen.svg)]()
 [![Node](https://img.shields.io/badge/node-%E2%89%A522-blue.svg)]()
 
@@ -672,7 +672,7 @@ skill/
 | **v1.1.0** | Извлечение URL, переключение транспорта, push-уведомления, маршрутизация по правилам, обнаружение через DNS-SD |
 | **v1.0.1** | Идентификация устройства Ed25519, аутентификация метрик, CI |
 | **v1.0.0** | Промышленная готовность: персистентность, многораундовый режим, передача файлов, SSE, проверки доступности, мульти-токены, аудит |
-| **v0.1.0** | Первоначальная реализация A2A v0.3.0 |
+| **v0.1.0** | Первоначальная реализация A2A v1.0 |
 
 Подробности см. в [CHANGELOG.md](CHANGELOG.md), загрузки — в [Releases](https://github.com/win4r/openclaw-a2a-gateway/releases).
 

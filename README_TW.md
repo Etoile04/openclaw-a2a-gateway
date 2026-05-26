@@ -1,7 +1,7 @@
 # 🦞 OpenClaw A2A Gateway 外掛
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![A2A v0.3.0](https://img.shields.io/badge/A2A-v0.3.0-green.svg)](https://github.com/google/A2A)
+[![A2A v1.0](https://img.shields.io/badge/A2A-v1.0-green.svg)](https://github.com/google/A2A)
 [![Tests](https://img.shields.io/badge/tests-469%20passing-brightgreen.svg)]()
 [![Node](https://img.shields.io/badge/node-%E2%89%A522-blue.svg)]()
 
@@ -672,7 +672,7 @@ skill/
 | **v1.1.0** | URL 擷取、傳輸降級、推送通知、規則式路由、DNS-SD 探索 |
 | **v1.0.1** | Ed25519 裝置身份、指標認證、CI |
 | **v1.0.0** | 正式可用：持久化、多輪對話、檔案傳輸、SSE、健康檢查、多 token、稽核 |
-| **v0.1.0** | 初始 A2A v0.3.0 實作 |
+| **v0.1.0** | 初始 A2A v1.0 實作 |
 
 詳細資訊請參閱 [CHANGELOG.md](CHANGELOG.md)，下載請至 [Releases](https://github.com/win4r/openclaw-a2a-gateway/releases)。
 
